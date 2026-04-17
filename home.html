@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANKERGAMES // NIGHT CITY HUB</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=VT323&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background: #0a0a0f;
+            color: #00f0ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 35s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        .scanline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(57, 255, 20, 0.03) 50%);
+            background-size: 100% 6px;
+            pointer-events: none;
+            animation: scan 7s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-120%); }
+            100% { transform: translateY(300%); }
+        }
+
+        header {
+            border-bottom: 3px solid #ff00ff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 15, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff00ff, #00f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px #ff00ff;
+            letter-spacing: 4px;
+        }
+
+        nav a {
+            color: #39ff14;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 15px #ff00ff;
+        }
+
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(10,10,15,0.85), rgba(10,10,15,0.85)), 
+                        url(witcher.jpg) center/cover; /* Replace with your game image */
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff00ff, #00f0ff, #39ff14);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #ff00ff;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            color: #39ff14;
+            margin-bottom: 40px;
+            text-shadow: 0 0 12px #39ff14;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(90deg, #ff00ff, #00f0ff);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 35px #00f0ff;
+            transition: all 0.4s;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 50px #ff00ff;
+        }
+
+        .section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: rgba(15, 15, 28, 0.95);
+            border: 2px solid #00f0ff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h3 {
+            color: #39ff14;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .game-info p {
+            color: #a0f0ff;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: #050507;
+            border-top: 3px solid #ff00ff;
+            padding: 50px 8% 30px;
+            text-align: center;
+            color: #39ff14;
+        }
+
+        .footer-links a {
+            color: #00f0ff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ff00ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <header>
+        <div class="logo">CUNHAGAMES</div>
+        <nav>
+            <a href="#">GAMES</a>
+            <a href="#">COMMUNITY</a>
+            <a href="#">TOURNAMENTS</a>
+            <a href="#">LOGIN</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ENTER THE GRID</h1>
+            <p>Your ultimate cyberpunk gaming hub in Night City</p>
+            <a href="#" class="btn">JACK IN • START PLAYING</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">FEATURED RUNS</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="witcher.jpg" alt="Game 1">
+                <div class="game-info">
+                    <h3>SHADOW NET</h3>
+                    <p>Neon stealth • 2077 edition</p>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="cyber.jpg" alt="Game 2">
+                <div class="game-info">
+                    <h3>CHROME REBELS</h3>
+                    <p>High-octane cyber racing</p>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="punk.jpg" alt="Game 3">
+                <div class="game-info">
+                    <h3>VOID WALKERS</h3>
+                    <p>Multiplayer cyber survival</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">DISCORD</a>
+            <a href="#">TWITCH</a>
+            <a href="#">YOUTUBE</a>
+            <a href="#">SUPPORT</a>
+        </div>
+        <p style="margin-top: 30px; font-size: 1.1rem;">
+            © 2077 CUNHAGAMES • ALL RUNNERS WELCOME • STAY CHROME
+        </p>
+    </footer>
+
+</body>
+</html>
